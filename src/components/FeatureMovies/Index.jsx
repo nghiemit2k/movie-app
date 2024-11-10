@@ -1,10 +1,10 @@
 import React from 'react'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Paginateindicator from './Paginateindicator'
 import Movie from './Movie'
 import { useState, useEffect } from 'react'
+
 const FeatureMovie = () => {
+
     const [movies, setMovies] = useState([])
     const [activeMovieId, setActiveMovieId] = useState()
     useEffect(() => {
