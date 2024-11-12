@@ -1,5 +1,5 @@
 import React from 'react'
-import CircularProgressBar from './CircularProgressBar'
+import CircularProgressBar from '../CircularProgressBar'
 const MovieCart = ({ title, poster_path, release_date, point, mediaType }) => {
     return (
         <div className='border border-slate-800 rounded-lg relative'>
