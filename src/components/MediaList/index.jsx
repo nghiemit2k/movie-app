@@ -44,7 +44,7 @@ const MediaList = ({ title, tabs }) => {
             </div>
             <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4 lg:gap-6'>
                 {mediaList.map((movie) => (
-                    <MovieCart key={movie.id} title={movie.title || movie.name} poster_path={movie.poster_path}
+                    <MovieCart id={movie.id} key={movie.id} title={movie.title || movie.name} poster_path={movie.poster_path}
                         release_date={movie.release_date || movie.first_air_date} point={movie.vote_average}
 
                         mediaType={movie.media_type || activeTabId}
