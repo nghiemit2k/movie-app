@@ -1,10 +1,11 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import Loading from '../components/Loading'
-import Banner from '../components/MediaDetail/Banner'
-import ActorList from '../components/MediaDetail/ActorList'
-import RelatedMediaList from '../components/MediaDetail/RelatedMediaList'
+import Loading from '@components/Loading'
+import Banner from '@components/MediaDetail/Banner'
+import ActorList from '@components/MediaDetail/ActorList'
+import RelatedMediaList from '@components/MediaDetail/RelatedMediaList'
+
 const MovieDetail = () => {
     const { id } = useParams()
     const [movieInfo, setMovieInfo] = useState({})
