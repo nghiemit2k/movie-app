@@ -19,7 +19,11 @@ const browserRouter = createBrowserRouter([
       }
     ]
   }
-])
+], {
+  future: {
+    v7_partialHydration: true
+  }
+})
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RouterProvider router={browserRouter} />

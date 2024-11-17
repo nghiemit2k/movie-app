@@ -5,6 +5,7 @@ import { faPlay } from '@fortawesome/free-solid-svg-icons'
 import _ from 'lodash'
 
 const Banner = ({ mediaInfo }) => {
+
     const certification = ((mediaInfo.release_dates?.results || []).find(item => item.iso_3166_1 === 'US')?.release_dates || [])
         .find((releaseDate) => releaseDate.certification)?.certification
 
@@ -12,7 +13,7 @@ const Banner = ({ mediaInfo }) => {
         .map((crew) => ({ id: crew.id, name: crew.name, job: crew.job }))
     const groupedCrews = _.groupBy(crews, 'job')
     return (
-        <div className='relative text-white overflow-hidden'>
+        <div className='relative text-white overflow-hidden shadow-sm shadow-slate-800' >
             <img className='absolute  inset-0 brightness-[.2]' src={`https://image.tmdb.org/t/p/original/${mediaInfo.backdrop_path}`} alt="movie poster" />
             <div className='flex relative max-w-screen-xl mx-auto lg:flex-row gap-6 lg:gap-8 px-6 py-10'>
                 <div className='flex-1 '>
@@ -26,7 +27,7 @@ const Banner = ({ mediaInfo }) => {
                         <p>{(mediaInfo.genres || []).map((genre) => genre.name).join(", ")}</p>
                     </div>
                     <div className='flex items-center gap-4 mt-4'>
-                        <div className='flex items-center gap-4'><CircularProgressBar percentage={Math.round(mediaInfo.vote_average * 10)} size={3.5} strokeWidth={0.3} />
+                        <div className='flex items-center gap-4'><CircularProgressBar percentage={Math.round((mediaInfo.vote_average || 0) * 10)} size={3.5} strokeWidth={0.3} />
                             Rating
                         </div>
                         <button>
@@ -41,7 +42,7 @@ const Banner = ({ mediaInfo }) => {
                     <div className='grid grid-cols-2 gap-8 mt-4 '>
                         {
                             Object.keys(groupedCrews).map((job) => (
-                                <div>
+                                <div key={job}>
                                     <p className='font-bold'>{job}</p>
                                     <p>{groupedCrews[job].map((crew) => crew.name).join(", ")}</p>
                                 </div>
