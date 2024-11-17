@@ -1,5 +1,5 @@
 import React from 'react'
-import MovieCart from './MovieCart'
+import MovieCart from '@components/MovieCart'
 import { useState, useEffect } from 'react'
 
 const MediaList = ({ title, tabs }) => {
@@ -13,7 +13,7 @@ const MediaList = ({ title, tabs }) => {
                 method: 'GET',
                 headers: {
                     accept: 'application/json',
-                    Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3YWE2MjJmNDcxMWYzZjYyOGU0NDE4Mzc3ZWJjZmQxOCIsIm5iZiI6MTczMTE1MzkwNi4wNTE1ODU3LCJzdWIiOiI2NzJmNGUyMTU5MDM2ZDJiY2YwOGVhNWEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.C8XIRLJItXjVBZvlZrUev9VDsJD_p3xsWlsfO7wyGPc`
+                    Authorization: `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`
                 }
             })
                 .then(async (res) => {
@@ -27,9 +27,9 @@ const MediaList = ({ title, tabs }) => {
         <div className='px-8 text-[1.2vw] py-10 bg-black text-white'>
             <div className='flex  items-center gap-4 mb-6'>
                 <p className='text-[2vw] font-bold'>{title}</p>
-                <ul className='flex border border-white rounded-full'>
+                <ul className='flex border border-white rounded-full overflow-hidden'>
                     {tabs.map((tab) => (
-                        <li key={tab.id} className={`bg-white text-black px-2 py-1 rounded cursor-pointer ${activeTabId === tab.id ? 'bg-red-500 text-white' : ''}`}
+                        <li key={tab.id} className={`bg-slate-500 text-white px-3 py-1 rounded cursor-pointer ${activeTabId === tab.id ? 'bg-slate-800 text-white' : ''}`}
                             onClick={() => setActiveTabId(tab.id)}>
                             {tab.name}
                         </li>

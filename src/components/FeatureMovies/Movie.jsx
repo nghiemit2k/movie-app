@@ -6,13 +6,13 @@ const Movie = ({ data }) => {
         <>
             <img src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`}
                 className="aspect-video  brightness-50 w-full" />
-            <div className='absolute bottom-[10%] left-8 w-1/2 sm:w-1/3'>
+            <div className='absolute bottom-[10%] left-10 w-1/2 sm:w-1/3'>
                 <p className='font-bold sm:text-[2vw]'>{data.title}</p>
                 <div>
                     <p className='text-gray-400 border border-gray-400 p-1 mb-1 inline-block rounded-md'>{data.release_date}</p>
                 </div>
                 <div>
-                    <div className='hidden sm:block text-[1.2vw] mt-4'>
+                    <div className='hidden  sm:block text-[1.2vw] mt-4'>
                         <p className='font-bold mb-2'>Overview</p>
                         <p>{data.overview}</p>
                     </div>
