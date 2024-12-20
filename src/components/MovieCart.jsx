@@ -1,16 +1,18 @@
 import React from 'react'
 import CircularProgressBar from './CircularProgressBar'
 import { Link } from 'react-router-dom'
+import ImagesComponent from './Images'
 const MovieCart = ({ id, title, poster_path, release_date, point, mediaType }) => {
     return (
         <Link to={`/movie/${id}`} className='border border-slate-800 rounded-lg '>
             <div className=' relative'>
                 {
                     mediaType === 'tv' && (
-                        <p className='absolute top-1 right-1 bg-black text-white p-1 text-sm rounded-md box-shadow-md font-bold'>TV Show</p>
+                        <p className='absolute top-1 right-1 bg-black text-white 
+                        p-1 text-sm rounded-md box-shadow-md font-bold'>TV Show</p>
                     )
                 }
-                <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt="" className='rounded-lg' />
+                <ImagesComponent src={`https://image.tmdb.org/t/p/w500${poster_path}`} width={210} height={300} className='rounded-lg w-full ' />
                 <div className='px-4  relative -top-[1.5vw]'>
                     <div>
                         <CircularProgressBar percentage={Math.round(point * 10)}

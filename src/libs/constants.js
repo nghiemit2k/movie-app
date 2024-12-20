@@ -1,9 +1,9 @@
 export const TRENDING_TABS = [
-    { id: 'all', name: 'All', url: 'https://api.themoviedb.org/3/trending/all/day' },
-    { id: 'movie', name: 'Movies', url: 'https://api.themoviedb.org/3/trending/movie/day' },
-    { id: 'tv', name: 'Series', url: 'https://api.themoviedb.org/3/trending/tv/day' }
+    { id: 'all', name: 'All', url: '/trending/all/day' },
+    { id: 'movie', name: 'Movies', url: '/trending/movie/day' },
+    { id: 'tv', name: 'Series', url: '/trending/tv/day' }
 ]
 export const TOP_RATED_TABS = [
-    { id: 'movie', name: 'Movies', url: 'https://api.themoviedb.org/3/movie/top_rated' },
-    { id: 'tv', name: 'Series', url: 'https://api.themoviedb.org/3/tv/top_rated' }
+    { id: 'movie', name: 'Movies', url: '/movie/top_rated' },
+    { id: 'tv', name: 'Series', url: '/tv/top_rated' }
 ]

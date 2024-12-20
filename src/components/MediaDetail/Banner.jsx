@@ -3,7 +3,7 @@ import CircularProgressBar from '../CircularProgressBar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay } from '@fortawesome/free-solid-svg-icons'
 import _ from 'lodash'
-
+import ImagesComponent from '../Images'
 const Banner = ({ mediaInfo }) => {
 
     const certification = ((mediaInfo.release_dates?.results || []).find(item => item.iso_3166_1 === 'US')?.release_dates || [])
@@ -14,10 +14,15 @@ const Banner = ({ mediaInfo }) => {
     const groupedCrews = _.groupBy(crews, 'job')
     return (
         <div className='relative text-white overflow-hidden shadow-sm shadow-slate-800' >
-            <img className='absolute  inset-0 brightness-[.2]' src={`https://image.tmdb.org/t/p/original/${mediaInfo.backdrop_path}`} alt="movie poster" />
+            {/* <img className='absolute  inset-0 brightness-[.2]' src={`https://image.tmdb.org/t/p/original/${mediaInfo.backdrop_path}`}
+                alt="movie poster" width={1920} height={1080} /> */}
+            <ImagesComponent src={`https://image.tmdb.org/t/p/original/${mediaInfo.backdrop_path}`}
+                width={1920} height={1080} className='absolute inset-0 brightness-[.2]' />
             <div className='flex relative max-w-screen-xl mx-auto lg:flex-row gap-6 lg:gap-8 px-6 py-10'>
                 <div className='flex-1 '>
-                    <img src={`https://image.tmdb.org/t/p/w500/${mediaInfo.poster_path}`} alt="movie poster" />
+                    {/* <img src={`https://image.tmdb.org/t/p/w500/${mediaInfo.poster_path}`} alt="movie poster" width={500} height={750} /> */}
+                    <ImagesComponent src={`https://image.tmdb.org/t/p/w500/${mediaInfo.poster_path}`}
+                        width={500} height={750} className='rounded-lg w-full ' />
                 </div>
                 <div className='flex-[2] text-[1.2vw]'>
                     <p className='font-bold text-[2vw] mb-2'>{mediaInfo.title}</p>
