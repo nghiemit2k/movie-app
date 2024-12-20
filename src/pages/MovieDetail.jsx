@@ -6,51 +6,17 @@ import Banner from '@components/MediaDetail/Banner'
 import ActorList from '@components/MediaDetail/ActorList'
 import RelatedMediaList from '@components/MediaDetail/RelatedMediaList'
 import MovieInformation from '@components/MediaDetail/MovieInformation'
+import useFetch from '@hooks/useFetch'
+import { data } from 'autoprefixer'
 const MovieDetail = () => {
     const { id } = useParams()
-    const [movieInfo, setMovieInfo] = useState({})
-    const [isLoading, setIsLoading] = useState(false)
-    const [isRelatedMovieListLoading, setIsRelatedMovieListLoading] = useState(false)
-    const [relatedMovieList, setRelatedMovieList] = useState([])
-    useEffect(() => {
-        setIsLoading(true)
-        fetch(`https://api.themoviedb.org/3/movie/${id}?append_to_response=release_dates,credits`, {
-            method: 'GET',
-            headers: {
-                accept: 'application/json',
-                Authorization: `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`
-            }
-        })
-            .then(async (res) => {
-                const data = await res.json()
-                setMovieInfo(data)
 
-            }).catch((err) => {
-                console.log(err)
-            }).finally(() => {
-                setIsLoading(false)
-            })
-    }, [id])
+    // get data and assign to movieInfo
+    const { data: movieInfo, isLoading } = useFetch({ url: `/movie/${id}?append_to_response=release_dates,credits` })
 
-    useEffect(() => {
-        setIsRelatedMovieListLoading(true)
-        fetch(`https://api.themoviedb.org/3/movie/${id}/recommendations`, {
-            method: 'GET',
-            headers: {
-                accept: 'application/json',
-                Authorization: `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`
-            }
-        })
-            .then(async (res) => {
-                const data = await res.json()
-                const currentRelatedMovieList = (data.results || []).slice(0, 12)
-                setRelatedMovieList(currentRelatedMovieList)
-            }).catch((err) => {
-                console.log(err)
-            }).finally(() => {
-                setIsRelatedMovieListLoading(false)
-            })
-    }, [id])
+    const { data: recommendationsResponse, isLoading: isRelatedMovieListLoading } = useFetch({ url: `/movie/${id}/recommendations` })
+    const relatedMovieList = recommendationsResponse.results || []
+    console.log({ movieInfo, relatedMovieList })
     if (isLoading || isRelatedMovieListLoading) return <Loading />
     return (
         <div>
@@ -59,7 +25,7 @@ const MovieDetail = () => {
                 <div className='flex mx-auto max-w-screen-xl px-6 py-10 gap-6 sm:gap-8 '>
                     <div className='flex-[2]'>
                         <ActorList actors={movieInfo.credits?.cast || []} />
-                        <RelatedMediaList mediaList={relatedMovieList} />
+                        <RelatedMediaList mediaList={relatedMovieList} isLoading={isRelatedMovieListLoading} />
                     </div>
                     <div className='flex-1'>
                         <MovieInformation movieInfo={movieInfo} />

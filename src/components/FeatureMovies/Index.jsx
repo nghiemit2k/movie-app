@@ -2,26 +2,20 @@ import React from 'react'
 import Paginateindicator from './Paginateindicator'
 import Movie from './Movie'
 import { useState, useEffect } from 'react'
-
+import useFetch from '@hooks/useFetch'
 const FeatureMovie = () => {
-
-    const [movies, setMovies] = useState([])
     const [activeMovieId, setActiveMovieId] = useState()
+    const { data: popularMoviesResponse } = useFetch({ url: `/movie/popular` })
+    console.log({ popularMoviesResponse })
+    const movies = (popularMoviesResponse.results || []).slice(0, 4)
+    // set active movie id when movies array is not empty
+    // useEffect: run when movies array is changed
     useEffect(() => {
-        fetch('https://api.themoviedb.org/3/movie/popular', {
-            method: 'GET',
-            headers: {
-                accept: 'application/json',
-                Authorization: `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`
-            }
-        })
-            .then(async (res) => {
-                const data = await res.json()
-                const popularMovies = data.results.slice(0, 4)
-                setMovies(popularMovies)
-                setActiveMovieId(popularMovies[0].id)
-            })
-    }, [])
+        if (movies.length > 0) {
+            setActiveMovieId(movies[0].id)
+        }
+
+    }, [JSON.stringify(movies)]) // compare movies array use JSON.stringify to avoid re-render
     return (
         <div className='relative text-white'>
             {movies.filter(movie => movie.id === activeMovieId).map((movie) => (
